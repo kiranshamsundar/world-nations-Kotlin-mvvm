@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+
+    <data>
+        <variable name="viewModel" type="training.cg.com.kotlin.nations.CountryListViewModel"/>
+        <import type="android.view.View"/>
+    </data>
+
+    <android.support.design.widget.CoordinatorLayout
+        android:id="@+id/coordinator"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@android:color/white"
+        android:clickable="true">
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recycler"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:dataSetChanged="@{viewModel.countries}"
+            app:userClicks="@{viewModel.userClicks}"/>
+
+        <TextView
+            android:text="@{viewModel.errorMessage}"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="18sp"
+            android:textColor="@android:color/white"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:padding="40dp"
+            android:background="@android:color/background_dark"
+            android:visibility="@{viewModel.error ? View.VISIBLE : View.GONE}" />
+
+        <ProgressBar
+            app:showProgress="@{viewModel.loading}"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:clickable="false"
+            android:layout_gravity="center"/>
+
+        <Button
+            android:text="@string/action_reload"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:enabled="@{viewModel.reloadButtonEnabled}"
+            android:onClick="@{() -> viewModel.loadData()}"/>
+    </android.support.design.widget.CoordinatorLayout>
+</layout>

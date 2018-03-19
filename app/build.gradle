@@ -1,0 +1,95 @@
+apply plugin: 'com.android.application'
+
+apply plugin: 'kotlin-android'
+
+apply plugin: 'kotlin-android-extensions'
+
+apply plugin: 'kotlin-kapt'
+
+android {
+    compileSdkVersion 26
+    buildToolsVersion '26.0.2'
+
+
+    dataBinding {
+        enabled = true
+    }
+
+
+    defaultConfig {
+        applicationId "training.cg.com.kotlin"
+        minSdkVersion 15
+        targetSdkVersion 26
+        versionCode 1
+        versionName "1.0"
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+
+def supportLibVersion = '26.1.0'
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation"org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
+
+    //Glide
+    implementation 'com.github.bumptech.glide:glide:3.6.0'
+    kapt 'com.github.bumptech.glide:compiler:4.2.0'
+
+    //Android binding
+    kapt 'com.android.databinding:compiler:3.0.1'
+
+    // Support Library
+    implementation "com.android.support:design:$supportLibVersion"
+    implementation "com.android.support:recyclerview-v7:$supportLibVersion"
+    implementation "com.android.support:cardview-v7:$supportLibVersion"
+    implementation "com.android.support:appcompat-v7:$supportLibVersion"
+    implementation 'com.android.support.constraint:constraint-layout:1.0.2'
+
+    // Retrofit
+    implementation 'com.squareup.retrofit2:retrofit:2.2.0'
+    implementation 'com.squareup.retrofit2:converter-gson:2.2.0'
+    implementation 'com.squareup.retrofit2:adapter-rxjava:2.2.0'
+    implementation 'com.squareup.okhttp3:logging-interceptor:3.7.0'
+
+    // Dagger for DI
+    kapt 'com.google.dagger:dagger-compiler:2.4'
+    implementation 'com.google.dagger:dagger:2.4'
+    provided 'org.glassfish:javax.annotation:10.0-b28'
+
+    // RxAndroid
+    implementation 'io.reactivex:rxandroid:1.2.1'
+    implementation 'io.reactivex:rxjava:1.3.0'
+
+    //RX binding
+    implementation 'com.jakewharton.rxbinding:rxbinding-kotlin:1.0.1'
+    implementation 'com.jakewharton.rxbinding:rxbinding-support-v4-kotlin:1.0.1'
+    implementation 'com.jakewharton.rxrelay:rxrelay:1.2.0'
+
+    //Svg
+    compile 'com.caverock:androidsvg:1.2.1'
+
+    // Timber log
+    implementation 'com.jakewharton.timber:timber:4.3.1'
+
+    // Multidexing
+    implementation 'com.android.support:multidex:1.0.3'
+
+    testImplementation 'junit:junit:4.12'
+    androidTestImplementation 'com.android.support.test:runner:1.0.1'
+    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
+
+    androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
+        exclude group: 'com.android.support', module: 'support-annotations'
+    })
+
+    testImplementation 'io.kotlintest:kotlintest:2.0.1'
+    testImplementation "com.nhaarman:mockito-kotlin:1.4.0"
+}
